@@ -198,9 +198,6 @@ public class AppointmentService {
             appointmentRepository.delete(appointment);
 
             return true;
-//
-//
-//            return true;
         }
         else
             return false;
