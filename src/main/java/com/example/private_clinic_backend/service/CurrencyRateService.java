@@ -17,7 +17,7 @@ import java.util.List;
 public class CurrencyRateService {
 
     @Autowired
-    private RateRepository rateRepository;
+    public RateRepository rateRepository;
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
 

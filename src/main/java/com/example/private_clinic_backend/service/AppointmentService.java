@@ -1,5 +1,6 @@
 package com.example.private_clinic_backend.service;
 
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.private_clinic_backend.dto.AppointmentDto;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Setter
 public class AppointmentService {
     @Autowired
     private AppointmentRepository appointmentRepository;
