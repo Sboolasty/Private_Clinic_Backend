@@ -1,0 +1,10 @@
+Welcome to the README file for the Private_Clinic backend REST API.
+This API serves as the backend for the Private Clinic application,
+ which has its frontend in a separate repository accessible at https://github.com/Sboolasty/Private_Clinic_Frontend
+
+The Backend REST API Private_Clinic is a crucial component of the Private Clinic application.
+It handles various functionalities, such as patient and doctor registration, appointment scheduling,
+ and fee collection in different currencies.
+
+Known bugs:
+Frontend application will crash if backend application is not running.
