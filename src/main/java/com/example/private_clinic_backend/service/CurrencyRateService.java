@@ -1,6 +1,5 @@
 package com.example.private_clinic_backend.service;
 
-import com.example.private_clinic_backend.dto.RateDto;
 import com.example.private_clinic_backend.entity.Currency;
 import com.example.private_clinic_backend.entity.Rate;
 import com.example.private_clinic_backend.repository.RateRepository;
@@ -55,18 +54,14 @@ public class CurrencyRateService {
                 }
             }
 
-//            responseObject.setRateList(filteredRates);
-
             for (Rate rate: filteredRates
                  ) {
                 rateRepository.save(rate);
                 System.out.println(rate.toString() + " saved");
             }
 
-//            return responseObject;
         } catch (Exception e) {
             // Handle the exception
-//            return null;
             Rate rateUSD = new Rate("", "USD", 4.15, 1L);
             Rate rateEUR = new Rate("", "EUR", 4.5, 2L);
             Rate rateCHF = new Rate("", "CHF", 4.68, 3L);

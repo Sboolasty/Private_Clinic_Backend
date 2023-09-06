@@ -3,7 +3,6 @@ package com.example.private_clinic_backend.service;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.private_clinic_backend.dto.AppointmentDto;
 import com.example.private_clinic_backend.dto.ReserveAppointmentDto;
 import com.example.private_clinic_backend.dto.ResultAppointmentDto;
 import com.example.private_clinic_backend.entity.*;
@@ -132,12 +131,11 @@ public class AppointmentService {
                 appointment = appointmentOpt.get();
             else
                 return null;
-            // set previousDate status free
 
+            // set previousDate status free
             AvailabilityDate prevAvailabilityDate = appointment.getAppointmentDate();
             prevAvailabilityDate.setFree(true);
             availabilityDateRepository.save(prevAvailabilityDate);
-
 
             // set new date
             appointment.setAppointmentDate(availabilityDateOptional.get());

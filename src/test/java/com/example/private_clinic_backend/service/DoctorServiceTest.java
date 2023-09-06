@@ -48,7 +48,6 @@ public class DoctorServiceTest {
         when(doctorRepository.findDoctorByLicenseNumber(licenseNumber)).thenReturn(doctor);
 
         List<Appointment> appointments = new ArrayList<>();
-        // Add some appointments to the list
 
         User user = new User();
         user.setAppointmentList(appointments);
@@ -57,7 +56,6 @@ public class DoctorServiceTest {
         List<ScheduleAppointmentDto> result = doctorService.findDoctorsAppointments(licenseNumber);
 
         assertNotNull(result);
-        // Add assertions for the expected results based on the appointments added
     }
 
     @Test

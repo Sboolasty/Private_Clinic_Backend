@@ -1,6 +1,5 @@
 package com.example.private_clinic_backend.controller;
 
-import com.example.private_clinic_backend.controller.UserController;
 import com.example.private_clinic_backend.dto.RegistrationDto;
 import com.example.private_clinic_backend.dto.ResultRegistrationDto;
 import com.example.private_clinic_backend.dto.ResultUserDto;
@@ -25,7 +24,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.Mockito.*;
 
 public class UserControllerTest {
 
@@ -93,15 +91,13 @@ public class UserControllerTest {
 
     @Test
     public void testFindUserById() throws Exception {
-        // Przykładowy użytkownik o ID 1
+
         Long userId = 1L;
         User user = new User();
         user.setUserId(userId);
 
-        // Mockowanie metody userService.findUserById, aby zwracała przykładowego użytkownika
         when(userService.findUserById(userId)).thenReturn(user);
 
-        // Wykonanie żądania GET
         mockMvc.perform(MockMvcRequestBuilders.get("/users/{id}", userId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.userId").value(userId));

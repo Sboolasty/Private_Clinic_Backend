@@ -5,13 +5,10 @@ import com.example.private_clinic_backend.repository.RateRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -33,7 +30,7 @@ public class CurrencyRateServiceTest {
 
     @Test
     void testFetchDataFromExternalAPI_Success() throws Exception {
-        // Przygotowanie danych testowych
+        // given
         String mockApiResponse = "[{\"code\":\"USD\",\"rate\":4.15},{\"code\":\"EUR\",\"rate\":4.5},{\"code\":\"CHF\",\"rate\":4.68}]";
         Rate[] mockRates = {
                 new Rate("USD", "USD", 4.15, 1L),
@@ -41,47 +38,41 @@ public class CurrencyRateServiceTest {
                 new Rate("CHF", "CHF", 4.68, 3L)
         };
 
-        // Symulowanie zachowań
+        // when&then
         when(restTemplate.getForObject(anyString(), eq(String.class))).thenReturn(mockApiResponse);
         when(objectMapper.readValue(anyString(), eq(Rate[].class))).thenReturn(mockRates);
 
-        // Wywołanie metody do testowania
         currencyRateService.fetchDataFromExternalAPI();
 
-        // Sprawdzenie, czy dane zostały zapisane do repozytorium
         verify(rateRepository, times(3)).save(any(Rate.class));
     }
     @Test
     void testGetAllRates() {
-        // Przygotowanie danych testowych
+        // given
         List<Rate> mockRates = Arrays.asList(
                 new Rate("USD", "USD", 4.15, 1L),
                 new Rate("EUR", "EUR", 4.5, 2L),
                 new Rate("CHF", "CHF", 4.68, 3L)
         );
 
-        // Symulowanie zachowania repozytorium
+        // when&then
         when(rateRepository.findAll()).thenReturn(mockRates);
 
-        // Wywołanie metody do testowania
         List<Rate> result = currencyRateService.getAllRates();
 
-        // Sprawdzenie, czy metoda zwraca oczekiwane dane
         assertEquals(mockRates, result);
     }
 
     @Test
     void testGetRate() {
-        // Przygotowanie danych testowych
+        // given
         Rate mockRate = new Rate("USD", "USD", 4.15, 1L);
 
-        // Symulowanie zachowania repozytorium
+        // when&then
         when(rateRepository.findRateByCode("USD")).thenReturn(mockRate);
 
-        // Wywołanie metody do testowania
         Rate result = currencyRateService.getRate("USD");
 
-        // Sprawdzenie, czy metoda zwraca oczekiwany wynik
         assertEquals(mockRate, result);
     }
 }

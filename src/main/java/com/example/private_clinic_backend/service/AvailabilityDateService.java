@@ -3,7 +3,6 @@ package com.example.private_clinic_backend.service;
 import com.example.private_clinic_backend.dto.AvailabiltyDateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.private_clinic_backend.entity.Appointment;
 import com.example.private_clinic_backend.entity.AvailabilityDate;
 import com.example.private_clinic_backend.entity.Doctor;
 import com.example.private_clinic_backend.repository.AvailabilityDateRepository;
@@ -24,13 +23,7 @@ public class AvailabilityDateService {
     public AvailabilityDate createAvailabilityDate(AvailabilityDate availabilityDate){
 
         Doctor doctor = availabilityDate.getDoctor();
-//        Optional<AvailabilityDate> adOptional = doctor.getAvailabilityDates().stream().filter(a -> a.getDate().isEqual(availabilityDate.getDate())).findFirst();
-//        if (adOptional.isEmpty()){
         availabilityDateRepository.save(availabilityDate);
-
-//        doctor.getAvailabilityDates().add(availabilityDate);
-//        doctorRepository.save(doctor);
-//        }
 
         return availabilityDate;
     }
@@ -41,7 +34,7 @@ public class AvailabilityDateService {
         if (doctor != null) {
             List<AvailabilityDate> availabilityDates = doctor.getAvailabilityDates();
 
-            // Sprawdź, czy lista jest pusta lub null
+            // Verify that list is null
             if (availabilityDates == null) {
                 availabilityDates = new ArrayList<>();
                 doctor.setAvailabilityDates(availabilityDates);
@@ -57,7 +50,6 @@ public class AvailabilityDateService {
                 return null;
             }
         } else {
-            // Obsłuż przypadek, gdy lekarz nie został znaleziony
             return null;
         }
     }

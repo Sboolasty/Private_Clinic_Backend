@@ -51,18 +51,16 @@ public class AvailabilityDateControllerTest {
 
     @Test
     public void testFindAvailabilityDatesByUserId() {
-        // Przygotowanie danych testowych
+        // given
         String userIdNumber = "123456789";
         Doctor doctor = new Doctor();
         doctor.setAvailabilityDates(new ArrayList<>());
 
-        // Mockowanie zachowania serwisów
+        // when & then
         when(doctorService.getDoctorByUserIdNumber(userIdNumber)).thenReturn(doctor);
 
-        // Wywołanie metody kontrolera
         ResponseEntity<List<AvailabilityDate>> response = availabilityDateController.findAvailabilityDatesByUserId(userIdNumber);
 
-        // Sprawdzenie czy odpowiedź jest poprawna
         assertEquals(200, response.getStatusCodeValue());
         assertEquals(0, response.getBody().size()); // Zakładając, że lekarz nie ma dostępnych dat
     }

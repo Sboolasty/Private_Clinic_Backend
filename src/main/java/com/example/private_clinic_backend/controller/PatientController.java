@@ -3,9 +3,7 @@ package com.example.private_clinic_backend.controller;
 import com.example.private_clinic_backend.entity.Patient;
 import com.example.private_clinic_backend.service.PatientService;
 import lombok.Data;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -26,5 +24,4 @@ public class PatientController {
     public Optional<Patient> findPatientById(@PathVariable(value = "id") Long id){
         return patientService.findPatientById(id);
     }
-
 }

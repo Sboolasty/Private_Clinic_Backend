@@ -66,7 +66,6 @@ public class UserServiceTest {
         when(userRepository.findUserByEmail(registrationDto.getEmail())).thenReturn(null);
         when(doctorRepository.findDoctorByLicenseNumber(registrationDto.getDoctorDto().getLicenseNumber())).thenReturn(null);
 
-        // Mockujemy zachowanie createAvailabilityDate, aby sprawdzić, czy zostanie wywołane
         when(availabilityDateService.createAvailabilityDate(any(AvailabilityDate.class))).thenReturn(new AvailabilityDate());
 
         ResultRegistrationDto result = userService.registration(registrationDto);
@@ -81,7 +80,7 @@ public class UserServiceTest {
 
         verify(userRepository, times(1)).save(any(User.class));
         verify(doctorRepository, times(1)).save(any(Doctor.class));
-        // Weryfikujemy, czy createAvailabilityDate zostało wywołane raz
+
         verify(availabilityDateService, times(3)).createAvailabilityDate(any(AvailabilityDate.class));
     }
 
@@ -91,7 +90,7 @@ public class UserServiceTest {
         UserLoginDto loginForm = new UserLoginDto();
         User user = createUser();
 
-        // Ustaw prawidłowe hasło w obiekcie loginForm
+
         loginForm.setPassword("twoje_prawidlowe_haslo");
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

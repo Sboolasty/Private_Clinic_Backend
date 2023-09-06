@@ -39,12 +39,12 @@ public class DoctorControllerTest {
     @Test
     public void testFindAllDoctors() throws Exception {
         List<Doctor> doctors = new ArrayList<>();
-        // Dodaj przykładowych lekarzy do listy
+        // given
         Doctor doctor1 = new Doctor();
         doctor1.setIdDoctor(1L);
         doctor1.setLicenseNumber("12345");
         doctors.add(doctor1);
-
+        //when& then
         when(doctorService.findAllDoctors()).thenReturn(doctors);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/doctors")
@@ -61,7 +61,7 @@ public class DoctorControllerTest {
     public void testFindDoctorsAppointments() throws Exception {
         String licenseNumber = "12345";
         List<ScheduleAppointmentDto> appointments = new ArrayList<>();
-        // Dodaj przykładowe wizyty do listy
+        // given
         ScheduleAppointmentDto appointment1 = new ScheduleAppointmentDto(
                 1L,
                 LocalDateTime.now(),
@@ -72,7 +72,7 @@ public class DoctorControllerTest {
                 "Smith"
         );
         appointments.add(appointment1);
-
+        //when & then
         when(doctorService.findDoctorsAppointments(licenseNumber)).thenReturn(appointments);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/doctors/{licenseNumber}/appointments", licenseNumber)
@@ -91,9 +91,10 @@ public class DoctorControllerTest {
 
     @Test
     public void testGetLicenseNumberByUser() throws Exception {
+        //given
         String userIdNumber = "user123";
         String licenseNumber = "12345";
-
+        //when & then
         when(doctorService.getLicenseNumberByUserIdNumber(userIdNumber)).thenReturn(licenseNumber);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/licenseNumberByUser/{userIdNumber}", userIdNumber)

@@ -32,16 +32,16 @@ class CurrencyRateControllerTest {
 
     @Test
     void getCurrencyRates_shouldReturnCurrencyRates() {
-        // Arrange
+        // given
         List<Rate> rateList = new ArrayList<>();
         rateList.add(new Rate("USD", "123", 1.0, 1L));
         rateList.add(new Rate("EUR", "456", 2.0, 2L));
         when(currencyRateService.getAllRates()).thenReturn(rateList);
 
-        // Act
+        // when
         ResponseEntity<List<Rate>> responseEntity = currencyRateController.getCurrencyRates();
 
-        // Assert
+        // then
         verify(currencyRateService, times(1)).getAllRates();
         assert(responseEntity.getStatusCode().is2xxSuccessful());
         assert(responseEntity.getBody() != null);
@@ -51,15 +51,15 @@ class CurrencyRateControllerTest {
 
     @Test
     void getCurrencyRate_shouldReturnCurrencyRate() {
-        // Arrange
+        // given
         String currencyCode = "USD";
         Rate rate = new Rate("123", "USD", 1.0, 1L);
         when(currencyRateService.getRate(currencyCode)).thenReturn(rate);
 
-        // Act
+        // when
         ResponseEntity<Rate> responseEntity = currencyRateController.getCurrencyRate(currencyCode);
 
-        // Assert
+        // then
         verify(currencyRateService, times(1)).getRate(currencyCode);
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertNotNull(responseEntity.getBody());

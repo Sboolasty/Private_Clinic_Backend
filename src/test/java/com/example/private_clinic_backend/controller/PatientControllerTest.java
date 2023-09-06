@@ -29,41 +29,31 @@ public class PatientControllerTest {
 
     @Test
     public void testFindAllPatients() {
-        // Create a list of patients for testing
+        // given
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient());
         patients.add(new Patient());
 
-        // Mock the behavior of the patientService
+        // when & then
         when(patientService.findAllPatients()).thenReturn(patients);
-
-        // Perform the GET request to /patients
         List<Patient> result = patientController.findAllPatients();
 
-        // Verify that the patientService's findAllPatients() method was called
         verify(patientService, times(1)).findAllPatients();
-
-        // Verify that the result matches the expected list of patients
         assertEquals(patients, result);
     }
 
     @Test
     public void testFindPatientById() {
-        // Create a patient for testing
+        // given
         Long patientId = 1L;
         Patient patient = new Patient();
         patient.setIdPatient(patientId);
 
-        // Mock the behavior of the patientService
+        // when & then
         when(patientService.findPatientById(patientId)).thenReturn(Optional.of(patient));
-
-        // Perform the GET request to /patients/{id}
         Optional<Patient> result = patientController.findPatientById(patientId);
 
-        // Verify that the patientService's findPatientById() method was called
         verify(patientService, times(1)).findPatientById(patientId);
-
-        // Verify that the result matches the expected patient
         assertTrue(result.isPresent());
         assertEquals(patient, result.get());
     }

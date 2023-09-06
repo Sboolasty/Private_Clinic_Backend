@@ -10,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDateTime;
@@ -39,7 +38,7 @@ public class AvailabilityDateServiceTest {
 
     @Test
     public void testCreateAvailabilityDate() {
-        // Przygotowanie danych testowych
+        // given
         AvailabilityDate availabilityDate = new AvailabilityDate(
                 LocalDateTime.now(),
                 true,
@@ -47,24 +46,20 @@ public class AvailabilityDateServiceTest {
                 new Doctor()
         );
 
-        // Kiedy wywołujemy availabilityDateRepository.save, zwracamy ten sam obiekt, który został przekazany do metody
+        // when & then
         when(availabilityDateRepository.save(any(AvailabilityDate.class))).thenReturn(availabilityDate);
 
-        // Wywołanie metody, którą testujemy
         AvailabilityDate result = availabilityDateService.createAvailabilityDate(availabilityDate);
 
-        // Sprawdzenie, czy metoda zwraca poprawny wynik
         assertNotNull(result);
         assertEquals(availabilityDate, result);
-
-        // Upewnienie się, że availabilityDateRepository.save zostało wywołane raz
         verify(availabilityDateRepository, times(1)).save(any(AvailabilityDate.class));
     }
 
 
     @Test
     public void testAddAvailabilityDate() {
-        // Tworzenie przykładowych danych
+        // given
         DoctorDto doctorDto = new DoctorDto();
         doctorDto.setLicenseNumber("12345");
 
@@ -80,25 +75,22 @@ public class AvailabilityDateServiceTest {
         availabilityDate.setDate(availabiltyDateDto.getDate());
         availabilityDate.setDoctor(doctor);
 
-        // Określenie zachowania atrap
+        // when&then
         when(doctorRepository.findDoctorByLicenseNumber(doctorDto.getLicenseNumber())).thenReturn(doctor);
         when(availabilityDateRepository.save(any(AvailabilityDate.class))).thenReturn(availabilityDate);
 
-        // Wywołanie metody testowanej
         AvailabiltyDateDto result = availabilityDateService.addAvailabilityDate(availabiltyDateDto);
 
-        // Aserty
+
         assertNotNull(result);
         assertEquals(availabiltyDateDto, result);
-
-        // Sprawdzamy, czy metoda save w repository została wywołana
         verify(availabilityDateRepository, times(1)).save(any(AvailabilityDate.class));
     }
 
 
     @Test
     public void testFindAvailabilityDateByDoctor() {
-        // Przygotowanie danych testowych
+        // given
         Long idDoctor = 1L;
 
         Doctor doctor = new Doctor();
@@ -108,17 +100,14 @@ public class AvailabilityDateServiceTest {
         availabilityDates.add(new AvailabilityDate());
         doctor.setAvailabilityDates(availabilityDates);
 
-        // Kiedy wywołujemy doctorRepository.findById, zwracamy przygotowanego lekarza
+        // when&then
         when(doctorRepository.findById(eq(idDoctor))).thenReturn(Optional.of(doctor));
 
-        // Wywołanie metody, którą testujemy
+
         List<AvailabilityDate> result = availabilityDateService.findAvailabilityDateByDoctor(idDoctor);
 
-        // Sprawdzenie, czy metoda zwraca poprawny wynik
         assertNotNull(result);
         assertEquals(availabilityDates.size(), result.size());
-
-        // Upewnienie się, że doctorRepository.findById zostało wywołane raz
         verify(doctorRepository, times(1)).findById(eq(idDoctor));
     }
 }

@@ -1,14 +1,11 @@
 package com.example.private_clinic_backend.service;
 
 import com.example.private_clinic_backend.dto.PollutionDto;
-import com.example.private_clinic_backend.entity.AirPollution;
-import com.example.private_clinic_backend.entity.Currency;
 import com.example.private_clinic_backend.entity.Value;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -61,7 +58,6 @@ public class AirPollutionService {
 
             return null;
         }
-
 
     }
 }
