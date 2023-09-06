@@ -6,5 +6,12 @@ The Backend REST API Private_Clinic is a crucial component of the Private Clinic
 It handles various functionalities, such as patient and doctor registration, appointment scheduling,
  and fee collection in different currencies.
 
+### Downloading a Project from GitHub and installation on Computer.
+Open Idea IntelIJ or terminal on your computer.
+Execute the git clone command to clone the repository from GitHub. 
+Type the repository's URL address, followed by a space, and then provide the name of the directory where you want to download it. 
+git clone https://github.com/Sboolasty/Private_Clinic_Backend
+run main method on class PrivateClinicApplicationBackend 
+
 Known bugs:
 Frontend application will crash if backend application is not running.
